@@ -1,6 +1,41 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmSSname": {
+            "type": "string",
+            "metadata": {
+                "description": "VM Scale Set name"
+            }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location for all resources, only US regions with Availability Zones are available"
+            },
+            "defaultValue": "Central US",
+            "allowedValues": [
+                "Central US",
+                "South Central US",
+                "East US",
+                "East US 2",
+                "West US 2",
+                "West US 3"
+            ]
+        },
+        "adminUserName": {
+            "type": "string",
+            "metadata": {
+                "description": "Admin user Name for VM"
+            }
+        },
+        "adminPassword": {
+            "type": "secureString",
+            "metadata": {
+                "description": "Admin password for VM"
+            }
+        }
+    },
     "variables": {
         "vnetName": "rackspace-vnet",
         "subnetName": "privateSubnet",
