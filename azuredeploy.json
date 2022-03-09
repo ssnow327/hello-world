@@ -6,7 +6,8 @@
             "type": "string",
             "metadata": {
                 "description": "VM Scale Set name"
-            }
+            },
+            "defaultValue": "rackss"
         },
         "location": {
             "type": "string",
@@ -27,13 +28,15 @@
             "type": "string",
             "metadata": {
                 "description": "Admin user Name for VM"
-            }
+            },
+            "defaultValue": "clouduser"
         },
         "adminPassword": {
             "type": "secureString",
             "metadata": {
                 "description": "Admin password for VM"
-            }
+            },
+            "defaultValue": "uniqueString()"
         }
     },
     "functions": [],
