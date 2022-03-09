@@ -6,8 +6,7 @@
             "type": "string",
             "metadata": {
                 "description": "VM Scale Set name"
-            },
-            "defaultValue": "rackss"
+            }
         },
         "location": {
             "type": "string",
@@ -36,7 +35,7 @@
             "metadata": {
                 "description": "Admin password for VM"
             },
-            "defaultValue": "uniqueString()"
+            "defaultValue": "[concat('P', uniqueString(resourceGroup().id, 'x', '!'))]"
         }
     },
     "functions": [],
@@ -396,5 +395,14 @@
             }
         }
     ],    
-    "outputs": {}
+    "outputs": {
+        "AdminUserName": {
+            "type": "string",
+            "value": "[parameters('adminUserName')]"
+        },
+        "Password": {
+            "type": "string",
+            "value": "[parameters('adminPassword')]"
+        }
+    }
 }
