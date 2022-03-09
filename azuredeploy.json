@@ -1,6 +1,34 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "variables": {
+        "vnetName": "rackspace-vnet",
+        "subnetName": "privateSubnet",
+        "addressPrefix": "10.100.0.0/16",
+        "subnetPrefix": "10.100.10.0/24",
+        "publicIPname": "[concat(parameters('vmSSname'), 'pip')]",
+        "publicIPaddressID": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPname'))]",
+        "apiVersion": "2021-05-01",
+        "loadBalancerName": "[concat(parameters('vmSSname'), 'lb')]",
+        "backendPool": "[concat(parameters('vmSSname'), 'bepool')]",
+        "frontendIPconfig": "LoadBalancerFrontEnd",
+        "frontEndIPconfigID": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations',variables('loadBalancerName'),variables('frontendIPconfig'))]",
+        "bePoolID": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',variables('loadBalancerName'),variables('backendPool'))]",
+        "lbProbe": "tcpProbe80",
+        "lbProbeID": "[resourceId('Microsoft.Network/loadBalancers/probes',variables('loadBalancerName'),variables('lbProbe'))]",
+        "osType": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2022-Datacenter",
+              "version": "latest"
+            },
+        "imageReference": "[variables('osType')]",
+        "vmSize": "Standard_B2ms",
+        "subnetNSG": "subnet-nsg",
+        "nicNSG": "nic-nsg",
+        "vmssID": "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('vmSSname'))]",
+        "autoScaleResourceName": "[concat(parameters('vmSSname'), 'autoscale')]"
+    },
     "resources": [
         {
             "name": "[variables('vnetName')]",
