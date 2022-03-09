@@ -6,7 +6,8 @@
             "type": "string",
             "metadata": {
                 "description": "VM Scale Set name"
-            }
+            },
+            "defaultValue": "rackss"
         },
         "location": {
             "type": "string",
