@@ -44,9 +44,9 @@
         "subnetName": "privateSubnet",
         "addressPrefix": "10.100.0.0/16",
         "subnetPrefix": "10.100.10.0/24",
-        "publicIPname": "[concat(parameters('vmSSname'), 'pip')]",
+        "publicIPname": "[concat(parameters('vmSSname'), '-pip')]",
         "publicIPaddressID": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPname'))]",
-        "loadBalancerName": "[concat(parameters('vmSSname'), 'lb')]",
+        "loadBalancerName": "[concat(parameters('vmSSname'), '-lb')]",
         "backendPool": "[concat(parameters('vmSSname'), 'bepool')]",
         "frontendIPconfig": "LoadBalancerFrontEnd",
         "frontEndIPconfigID": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations',variables('loadBalancerName'),variables('frontendIPconfig'))]",
@@ -345,7 +345,7 @@
                     {
                         "name": "CPUScale",
                         "capacity": {
-                            "minimum": "2",
+                            "minimum": "3",
                             "maximum": "10",
                             "default": "3"
                         },
