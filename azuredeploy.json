@@ -7,7 +7,7 @@
             "metadata": {
                 "description": "VM Scale Set name"
             },
-            "defaultValue": "rackss"
+            "defaultValue": "web01ss"
         },
         "location": {
             "type": "string",
@@ -41,7 +41,7 @@
     },
     "functions": [],
     "variables": {
-        "vnetName": "rackspace-vnet",
+        "vnetName": "[concat(parameters('vmSSname'), '-vnet')]",
         "subnetName": "privateSubnet",
         "addressPrefix": "10.100.0.0/16",
         "subnetPrefix": "10.100.10.0/24",
@@ -404,6 +404,10 @@
         "Password": {
             "type": "string",
             "value": "[parameters('adminPassword')]"
+        },
+        "PublicIPAddress": {
+            "type": "array",
+            "value": "[reference(variables('publicIPname')).PublicIPAddress]"
         }
     }
 }
