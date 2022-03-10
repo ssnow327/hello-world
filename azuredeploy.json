@@ -405,7 +405,7 @@
         },
         "PublicIPAddress": {
             "type": "string",
-            "value": "[reference(variables('publicIPname')).IPAddress]"
+            "value": "[reference(variables('publicIPname')).ipAddress]"
         }
     }
 }
