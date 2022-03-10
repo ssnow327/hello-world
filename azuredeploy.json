@@ -404,7 +404,7 @@
             "value": "[parameters('adminPassword')]"
         },
         "PublicIPAddress": {
-            "type": "array",
+            "type": "string",
             "value": "[reference(variables('publicIPname')).IPAddress]"
         }
     }
