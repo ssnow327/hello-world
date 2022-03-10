@@ -39,7 +39,6 @@
             "defaultValue": "[concat('P', uniqueString(resourceGroup().id, 'x', '!'))]"
         }
     },
-    "functions": [],
     "variables": {
         "vnetName": "[concat(parameters('vmSSname'), '-vnet')]",
         "subnetName": "privateSubnet",
@@ -47,7 +46,6 @@
         "subnetPrefix": "10.100.10.0/24",
         "publicIPname": "[concat(parameters('vmSSname'), 'pip')]",
         "publicIPaddressID": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPname'))]",
-        "apiVersion": "2021-05-01",
         "loadBalancerName": "[concat(parameters('vmSSname'), 'lb')]",
         "backendPool": "[concat(parameters('vmSSname'), 'bepool')]",
         "frontendIPconfig": "LoadBalancerFrontEnd",
@@ -72,7 +70,7 @@
         {
             "name": "[variables('vnetName')]",
             "type": "Microsoft.Network/virtualNetworks",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-11-01",
             "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
@@ -99,7 +97,7 @@
         {
             "name": "[variables('publicIPname')]",
             "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-11-01",
             "location": "[parameters('location')]",
             "sku": {
                 "name": "Standard",
@@ -113,7 +111,7 @@
         {
             "name": "[variables('loadBalancerName')]",
             "type": "Microsoft.Network/loadBalancers",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-11-01",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[variables('publicIPaddressID')]"
@@ -249,7 +247,7 @@
                                                 },
                                                 "loadBalancerBackendAddressPools": [
                                                     {
-                                                        "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', variables('loadBalancerName'), variables('backendPool'))]"
+                                                        "id": "[variables('bePoolID')]"
                                                     }
                                                 ]
                                             }    
@@ -288,7 +286,7 @@
         {
             "name": "[variables('subnetNSG')]",
             "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-11-01",
             "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
@@ -311,7 +309,7 @@
         {
             "name": "[variables('nicNSG')]",
             "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-11-01",
             "location": "[parameters('location')]",
             "properties": {
                 "securityRules": [
@@ -407,7 +405,7 @@
         },
         "PublicIPAddress": {
             "type": "array",
-            "value": "[reference(variables('publicIPname')).PublicIPAddress]"
+            "value": "[reference(variables('publicIPname')).IPAddress]"
         }
     }
 }
