@@ -345,7 +345,7 @@
                     {
                         "name": "CPUScale",
                         "capacity": {
-                            "minimum": "3",
+                            "minimum": "2",
                             "maximum": "10",
                             "default": "3"
                         },
@@ -398,10 +398,6 @@
         "AdminUserName": {
             "type": "string",
             "value": "[parameters('adminUserName')]"
-        },
-        "Password": {
-            "type": "string",
-            "value": "[parameters('adminPassword')]"
         },
         "PublicIPAddress": {
             "type": "string",
