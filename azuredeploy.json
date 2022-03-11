@@ -345,7 +345,7 @@
                     {
                         "name": "CPUScale",
                         "capacity": {
-                            "minimum": "3",
+                            "minimum": "2",
                             "maximum": "10",
                             "default": "3"
                         },
